@@ -17,30 +17,10 @@ const Card = ({
   const cityImage = 'https://source.unsplash.com/500x400/?' + capital;
 
   return (
-    <div className="cardBox" style={{
-      width:"300px",
-      height:"600",
-      backgroundColor:"white",
-      backgroundSize:"100%",
-      display:"flex",
-      justifyContent:"center",
-      alignItems: "center",
-      margin:"10px",
-      borderRadius:"10px",
-    }}>
+    <div className="cardBox" >
       
       <div className="inner" style={{
         backgroundImage:`url(${cityImage})`,
-        backgroundColor:"black",
-        width:"160px",
-        display:"flex",
-        flexDirection:"column",
-        justifyContent:"center",
-        alignItems:"center",
-        borderRadius:"10px",
-        color:"#fff",
-        filter: "grayscale(50%)",
-
       }}>
 
         <h2 className="name" >{capitalStart(commonName)}:</h2>
@@ -50,28 +30,46 @@ const Card = ({
               width:"50px",
             }}/> 
        
-        <div className="moreData">
-          <p>officialName: {officialName}</p>
-          <p>population: {population}</p>
-          <p>capital: {capital}</p>
-          {
-            Object.values(languages || {}).map((value, i)=>(
-              <span key={i}> {(i ? ', ' : '') + value} </span>
-            ))
-          }
-
-{
-            Object.values(currencies || {}).map((value, i)=>(
-              <span key={i}> {(i ? ', ' : '') + value} </span>
-            ))
-          }
-        </div>
-
         {/* <p>currency: {currency}</p>
         <p>languages: {languages}</p> */}
         </div>
         
-  
+        <div className="moreData">
+          <div className='smallData'>
+            <p>A:</p>
+            <p>{officialName}</p>
+          </div>
+          
+          <div className='smallData'>
+            <p>B:</p>
+            <p>{population}</p>
+          </div>
+          
+          <div className='smallData'>
+            <p>C: </p>
+            <p>{capital}</p>
+          </div>
+
+          <div className='smallData'>
+            <p>D: </p>
+          
+          {
+            Object.values(languages || {}).map((value, i)=>(
+              <p key={i}> {(i ? ', ' : '') + value} </p>
+            ))
+          }
+        </div>
+
+        <div className='smallData'>
+          <p>E:</p>
+          {
+            Object.values(currencies || {}).map((value, i)=>(
+              <p key={i}> {(i ? ', ' : '') + value.name} </p>
+            ))
+          }
+        </div>
+
+        </div>
 
     </div>
   );

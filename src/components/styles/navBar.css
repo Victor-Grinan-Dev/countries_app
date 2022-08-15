@@ -7,8 +7,14 @@
 
 .logo{
   width: 50px;
+  margin-top: 10px;
 }
 
+a{
+  text-decoration: none;
+  color: bisque;
+  margin: 0 10px ;
+}
 /*
 .navLinkContainer{
   background-color: aqua;

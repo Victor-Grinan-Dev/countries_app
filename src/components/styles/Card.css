@@ -1,0 +1,43 @@
+
+
+.cardBox{
+    width:450px;
+    height:200px;
+    background-color:white;
+    background-size:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    margin:10px;
+    border-radius:10px;
+}
+
+.inner{
+    background-color:"black";
+    width:200px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    color:#fff;
+    filter: grayscale(50%);
+}
+
+.moreData{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: smaller;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+
+.smallData{
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -5,7 +5,8 @@ import Browse from './components/pages/Browse';
 import SingleItem from './components/pages/SingleItem';
 import Navbar from './components/UIs/Navbar';
 import './components/styles/home.css';
-import './components/styles/navBar.css'
+import './components/styles/navBar.css';
+import './components/styles/Card.css';
 
 const App = () => {
 
