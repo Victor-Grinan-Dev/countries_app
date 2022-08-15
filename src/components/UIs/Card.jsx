@@ -2,7 +2,6 @@ import React from 'react';
 //import cardCss from './components/styles/card.scss';
 import { Link } from 'react-router-dom';
 
-
 const Card = ({ 
   commonName,
   officialName,
@@ -15,6 +14,8 @@ const Card = ({
 
   const capitalStart = (str) => str.charAt(0).toUpperCase() + str.slice(1);
   const cityImage = 'https://source.unsplash.com/500x400/?' + capital;
+
+
 
   return (
     <div className="cardBox" >
@@ -42,7 +43,8 @@ const Card = ({
           
           <div className='smallData'>
             <p>B:</p>
-            <p>{population}</p>
+            <p>{(population/1000000).toPrecision(2)}</p>
+            
           </div>
           
           <div className='smallData'>
@@ -55,7 +57,7 @@ const Card = ({
           
           {
             Object.values(languages || {}).map((value, i)=>(
-              <p key={i}> {(i ? ', ' : '') + value} </p>
+              <p key={i}> {(i ? '' : '') + value} </p>
             ))
           }
         </div>
@@ -64,7 +66,7 @@ const Card = ({
           <p>E:</p>
           {
             Object.values(currencies || {}).map((value, i)=>(
-              <p key={i}> {(i ? ', ' : '') + value.name} </p>
+              <p key={i}> {(i ? '' : '') + value.name} </p>
             ))
           }
         </div>

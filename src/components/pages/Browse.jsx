@@ -52,7 +52,6 @@ function Browse() {
     <div className="browse">
       
       <div className="search" >
-        <label> Search </label>
         <input type="text" className="searchImput" placeholder="🔍" onChange={searchHandler} />
       </div>
 

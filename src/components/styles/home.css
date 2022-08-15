@@ -9,9 +9,13 @@ body{
     height: 100vh;
     align-items: center;
     flex-direction: column;
-    background-image: url("http://source.unsplash.com/IoQioGLrz3Y");
+    background-color: rgb(34, 33, 33);
+    /* background-image: url("http://source.unsplash.com/IoQioGLrz3Y"); */
     background-repeat: no-repeat;
     background-size: 100%;
     position: absolute;
-    color: white;
+}
+
+.backGroundImage{
+    background-image: url("http://source.unsplash.com/IoQioGLrz3Y");
 }

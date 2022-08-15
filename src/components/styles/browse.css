@@ -6,23 +6,14 @@
     justify-content: center;
 }
 
-.addCard{
-    margin-top: 10px;
-    color: black;
-    text-decoration: none;
-}
-
-.addCard:hover{
-    text-shadow: 0 0 10px rgb(193, 75, 95),
-    0 0 2px rgb(193, 75, 95);
-}
 
 .search{
     margin-top: 20px;
 }
 
 .searchImput{
-    line-height: 30px;
+    line-height: 20px;
+    border-radius: 5px;
 }
 
 .showCards{
