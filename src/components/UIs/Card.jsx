@@ -9,31 +9,69 @@ const Card = ({
   population,
   flag,
   capital,
-  currency,
+  currencies,
   languages
 }) => {
 
   const capitalStart = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+  const cityImage = 'https://source.unsplash.com/500x400/?' + capital;
 
   return (
-    <div className="cardBox" >
+    <div className="cardBox" style={{
+      width:"300px",
+      height:"600",
+      backgroundColor:"white",
+      backgroundSize:"100%",
+      display:"flex",
+      justifyContent:"center",
+      alignItems: "center",
+      margin:"10px",
+      borderRadius:"10px",
+    }}>
       
-      <div className="cardHeader" >
+      <div className="inner" style={{
+        backgroundImage:`url(${cityImage})`,
+        backgroundColor:"black",
+        width:"160px",
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        borderRadius:"10px",
+        color:"#fff",
+        filter: "grayscale(50%)",
+
+      }}>
+
         <h2 className="name" >{capitalStart(commonName)}:</h2>
-       {/*  <img src={country.flag} alt={country.name} className="flag" /> */}
-      </div>
-      
-      <div className="imageContainer" >  
-          <img src={flag} alt={commonName} className="image" 
-          style={{
-            width:"50px",
-          }}/> 
-      <p>officialName: {officialName}</p>
-      <p>population: {population}</p>
-      <p>capital: {capital}</p>
-      {/* <p>currency: {currency}</p>
-      <p>languages: {languages}</p> */}
-      </div>
+
+        <img src={flag} alt={commonName} className="image" 
+            style={{
+              width:"50px",
+            }}/> 
+       
+        <div className="moreData">
+          <p>officialName: {officialName}</p>
+          <p>population: {population}</p>
+          <p>capital: {capital}</p>
+          {
+            Object.values(languages || {}).map((value, i)=>(
+              <span key={i}> {(i ? ', ' : '') + value} </span>
+            ))
+          }
+
+{
+            Object.values(currencies || {}).map((value, i)=>(
+              <span key={i}> {(i ? ', ' : '') + value} </span>
+            ))
+          }
+        </div>
+
+        {/* <p>currency: {currency}</p>
+        <p>languages: {languages}</p> */}
+        </div>
+        
+  
 
     </div>
   );

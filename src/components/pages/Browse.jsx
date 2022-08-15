@@ -28,12 +28,18 @@ function Browse() {
   const getcountries = () => axios.get(countriesApi);
   const getWeather = () => axios.get(countriesApi);
 
+  const countriesFilter = countries.filter((res) => {
+    res.name.common = res.name.common;
+    return res.name.common.toLowerCase().includes(search);
+  });
+
+
   useEffect(() => {
     setLoading(true);
     Promise.all([getcountries(), getWeather()]).then(function (results) {
       const countriesData = results[0]; 
       setCountries(countriesData.data);
-     console.log("promise.all, countriesData: ", countriesData.data)
+      //console.log("promise.all, countriesData: ", countriesData.data)
       setLoading(false);
     });
   }, []);
@@ -50,8 +56,14 @@ function Browse() {
         <input type="text" className="searchImput" placeholder="🔍" onChange={searchHandler} />
       </div>
 
-      <div className="showCards" >
-          {countries.map((country, index) => (
+      <div className="showCards" 
+      style={{
+        display:"flex",
+        flexWrap:"wrap",
+        flexDirection:"row"
+      }}
+      >
+          {countriesFilter.map((country, index) => (
                 //  console.log(country)
               <Card 
               key={index}
@@ -61,7 +73,7 @@ function Browse() {
               population={country.population}
               flag={country.flags.png}
               capital={country.capital}
-              currency={country.currencies}
+              currencies={country.currencies}
               languages={country.languages}
               />
 
