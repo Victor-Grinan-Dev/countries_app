@@ -74,6 +74,15 @@ function Browse() {
               capital={country.capital}
               currencies={country.currencies}
               languages={country.languages}
+
+              // data={country}
+
+              // country={country.find(
+              //   (country) => country.name.common === country.name.common
+              // )}
+
+              // {...country}
+
               />
 
               ))} 

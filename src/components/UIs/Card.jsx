@@ -9,24 +9,26 @@ const Card = ({
   flag,
   capital,
   currencies,
-  languages
+  languages,
+  data,
+  country
 }) => {
 
   const capitalStart = (str) => str.charAt(0).toUpperCase() + str.slice(1);
   const cityImage = 'https://source.unsplash.com/500x400/?' + capital;
 
-
-
   return (
+    
     <div className="cardBox" >
-      
+
+     
       <div className="inner" style={{
         backgroundImage:`url(${cityImage})`,
       }}>
 
-        <h2 className="name" >{capitalStart(commonName)}:</h2>
+        <h2 className="name" >{capitalStart(commonName)}</h2>
 
-        <img src={flag} alt={commonName} className="image" 
+        <img src={flag} alt={commonName} className="flag" 
             style={{
               width:"50px",
             }}/> 
@@ -72,14 +74,17 @@ const Card = ({
         </div>
 
         </div>
-
+        <Link to={commonName} className="info"> See more </Link>
     </div>
+    
   );
 };
 
 export default Card;
 
-
+/*
+state={{ data: data, country: country }} 
+*/
 
 {/* <div class="inner">
   <h2 class="title">Mit 117 Sachen durch Klugheimschen Basaltgebirge</h2>
