@@ -7,6 +7,19 @@ import capitalIcon from '../assets/countries_icons/countries_capital.png';
 import langIcon from '../assets/countries_icons/countries_language.png'
 import currencyIcon from '../assets/countries_icons/countries_currency.png'
 
+const populationControl = (pop_in_millions) => {
+
+  const scale = ["M", "K", ""]
+
+  if ( pop_in_millions < 1){
+    while ( pop_in_millions < 1){
+      pop_in_millions *= 10;
+    }
+  }
+
+  return pop_in_millions;
+}
+
 const Card = ({ 
   commonName,
   officialName,
@@ -15,12 +28,12 @@ const Card = ({
   capital,
   currencies,
   languages,
-  data,
-  country
+  data
+
 }) => {
 
   const capitalStart = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-  const cityImage = 'https://source.unsplash.com/500x400/?' + capital;
+  const cityImage = 'https://source.unsplash.com/500x400/?'  +  commonName; //+ capital;
 
   return (
     
@@ -48,7 +61,7 @@ const Card = ({
           
           <div className='smallData'>
           <p><img src={populationIcon} alt="officialName" className="tinyIcon" /></p>
-            <p>{(population/1000000).toPrecision(2)}</p>
+            <p>{(population/1000000).toPrecision(2)}M</p>
             
           </div>
           
@@ -77,7 +90,7 @@ const Card = ({
         </div>
 
         </div>
-        <Link to={commonName} className="info"> See more </Link>
+        <Link to={commonName} className="info" state={{data:data}}> See more </Link>
     </div>
     
   );

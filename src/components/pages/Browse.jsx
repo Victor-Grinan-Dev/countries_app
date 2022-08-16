@@ -75,12 +75,11 @@ function Browse() {
               currencies={country.currencies}
               languages={country.languages}
 
-              // data={country}
-
-              // country={country.find(
-              //   (country) => country.name.common === country.name.common
+              data={country}
+              
+              // country={countries.find(
+              // (country) => country.name.common === country.name.common
               // )}
-
               // {...country}
 
               />
