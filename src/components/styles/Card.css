@@ -54,3 +54,8 @@
     padding: 5px 15px;
     border-radius: 20px;
 }
+
+.tinyIcon{
+    width: 20px;
+    filter: grayscale(100%);
+}

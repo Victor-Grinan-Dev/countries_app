@@ -1,6 +1,11 @@
 import React from 'react';
 //import cardCss from './components/styles/card.scss';
 import { Link } from 'react-router-dom';
+import officialNameIcon from '../assets/countries_icons/countries_official_name.png';
+import populationIcon from '../assets/countries_icons/countries_population.png';
+import capitalIcon from '../assets/countries_icons/countries_capital.png';
+import langIcon from '../assets/countries_icons/countries_language.png'
+import currencyIcon from '../assets/countries_icons/countries_currency.png'
 
 const Card = ({ 
   commonName,
@@ -33,29 +38,27 @@ const Card = ({
               width:"50px",
             }}/> 
        
-        {/* <p>currency: {currency}</p>
-        <p>languages: {languages}</p> */}
         </div>
         
         <div className="moreData">
           <div className='smallData'>
-            <p>A:</p>
+            <p><img src={officialNameIcon} alt="officialName" className="tinyIcon" /></p>
             <p>{officialName}</p>
           </div>
           
           <div className='smallData'>
-            <p>B:</p>
+          <p><img src={populationIcon} alt="officialName" className="tinyIcon" /></p>
             <p>{(population/1000000).toPrecision(2)}</p>
             
           </div>
           
           <div className='smallData'>
-            <p>C: </p>
+          <p><img src={capitalIcon} alt="officialName" className="tinyIcon" /></p>
             <p>{capital}</p>
           </div>
 
           <div className='smallData'>
-            <p>D: </p>
+          <p><img src={langIcon} alt="officialName" className="tinyIcon" /></p>
           
           {
             Object.values(languages || {}).map((value, i)=>(
@@ -65,7 +68,7 @@ const Card = ({
         </div>
 
         <div className='smallData'>
-          <p>E:</p>
+        <p><img src={currencyIcon} alt="officialName" className="tinyIcon" /></p>
           {
             Object.values(currencies || {}).map((value, i)=>(
               <p key={i}> {(i ? '' : '') + value.name} </p>
