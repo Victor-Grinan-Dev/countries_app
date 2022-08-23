@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Card from '../UIs/Card';
+
+import BSCard from '../UIs/BSCard';
 
 
 const databaseAPI = 'http://localhost:3001/database';
@@ -62,9 +63,10 @@ function Browse() {
         flexDirection:"row"
       }}
       >
+
           {countriesFilter.map((country, index) => (
                 //  console.log(country)
-              <Card 
+              <BSCard 
               key={index}
               //key={country.ccn3}
               commonName={country.name.common} 
@@ -74,14 +76,8 @@ function Browse() {
               capital={country.capital}
               currencies={country.currencies}
               languages={country.languages}
-
+              url={`${country.name.common}`}
               data={country}
-              
-              // country={countries.find(
-              // (country) => country.name.common === country.name.common
-              // )}
-              // {...country}
-
               />
 
               ))} 

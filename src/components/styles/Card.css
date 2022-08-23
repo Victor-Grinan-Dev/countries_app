@@ -1,3 +1,4 @@
+
 .cardBox{
     width:450px;
     min-height:200px;
@@ -37,9 +38,26 @@
 .smallData{
     margin: 5px;
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.smallData .div {
+    margin: 10pxs;
+
+}
+
+.repeatedSmallData{
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.repeatedSmallData .p {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .flag{
@@ -57,4 +75,5 @@
     width: 20px;
     filter: grayscale(100%);
 }
+
 
