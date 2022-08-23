@@ -4,30 +4,24 @@ import axios from 'axios';
 
 import BSCard from '../UIs/BSCard';
 
-
-const databaseAPI = 'http://localhost:3001/database';
-
 const countriesApi = "https://restcountries.com/v3.1/all";
-
+const openWeather = "https://api.openweathermap.org/data/2.5/weather";
+const secretKey = "80e877059407012cbef59f8ac82bcf1c";
 
 
 function Browse() {
   const [countries, setCountries] = useState([]);
+  const [countriesWeather, setCountriesWeather] = useState({});
 
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
-
-  // const countriesFilter = countries.filter((res) => {
-  //   res.name = res.name.toLowerCase()
-  //   return res.name.includes(search.toLowerCase());
-  // });
 
   const searchHandler = (e) => {
     setSearch(e.target.value); 
     };
 
   const getcountries = () => axios.get(countriesApi);
-  const getWeather = () => axios.get(countriesApi);
+  const getWeather = (city) => axios.get(`${openWeather}?q=${city}&appid=${secretKey}&units=metric`);
 
   const countriesFilter = countries.filter((res) => {
     res.name.common = res.name.common;
@@ -37,10 +31,13 @@ function Browse() {
 
   useEffect(() => {
     setLoading(true);
-    Promise.all([getcountries(), getWeather()]).then(function (results) {
+      Promise.all([getcountries()]).then(function (results) {
       const countriesData = results[0]; 
       setCountries(countriesData.data);
-      //console.log("promise.all, countriesData: ", countriesData.data)
+      countries.map(country => {
+        console.log(country.capital)
+      })
+    
       setLoading(false);
     });
   }, []);
