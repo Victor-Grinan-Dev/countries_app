@@ -11,6 +11,10 @@ import currencyIcon from '../assets/countries_icons/countries_currency.png';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+const openWeather = "https://api.openweathermap.org/data/2.5/weather";
+const secretKey = "80e877059407012cbef59f8ac82bcf1c";
+const getWeather = (city) => axios.get(`${openWeather}?q=${city}&appid=${secretKey}&units=metric`);
+
 function BSCard({
     commonName,
     officialName,
@@ -26,6 +30,20 @@ function BSCard({
 {
   const capitalStart = (str) => str.charAt(0).toUpperCase() + str.slice(1);
   const cityImage = 'https://source.unsplash.com/500x400/?'  +  commonName; //+ capital;
+
+  useEffect(() => {
+    setLoading(true);
+      Promise.all([getcountries()]).then(function (results) {
+      const countriesData = results[0]; 
+      setCountries(countriesData.data);
+      countries.map(country => {
+        console.log(country.capital)
+      })
+    
+      setLoading(false);
+    });
+  }, []);
+
 
   return (
     <div style={{

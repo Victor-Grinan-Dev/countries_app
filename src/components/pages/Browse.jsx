@@ -5,9 +5,6 @@ import axios from 'axios';
 import BSCard from '../UIs/BSCard';
 
 const countriesApi = "https://restcountries.com/v3.1/all";
-const openWeather = "https://api.openweathermap.org/data/2.5/weather";
-const secretKey = "80e877059407012cbef59f8ac82bcf1c";
-
 
 function Browse() {
   const [countries, setCountries] = useState([]);
@@ -21,7 +18,7 @@ function Browse() {
     };
 
   const getcountries = () => axios.get(countriesApi);
-  const getWeather = (city) => axios.get(`${openWeather}?q=${city}&appid=${secretKey}&units=metric`);
+  
 
   const countriesFilter = countries.filter((res) => {
     res.name.common = res.name.common;
