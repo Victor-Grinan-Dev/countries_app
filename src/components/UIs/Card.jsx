@@ -7,9 +7,7 @@ import capitalIcon from '../assets/countries_icons/countries_capital.png';
 import langIcon from '../assets/countries_icons/countries_language.png'
 import currencyIcon from '../assets/countries_icons/countries_currency.png'
 
-//TODO: Million-Thouthans conversor.
-//ex data in: [10.5, 0.5, 0.0035, 0.00010]
-//ex data out: [10.5M, 500k, 3.5k, 100]
+
 const populationControl = (pop_in_millions) => {
 
   const scale = ["M", "K", ""]
