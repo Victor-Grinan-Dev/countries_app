@@ -1,23 +1,16 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-
-import officialNameIcon from '../assets/countries_icons/countries_official_name.png';
-import populationIcon from '../assets/countries_icons/countries_population.png';
-import capitalIcon from '../assets/countries_icons/countries_capital.png';
-import langIcon from '../assets/countries_icons/countries_language.png';
-import currencyIcon from '../assets/countries_icons/countries_currency.png';
-
-//import Image from "assets/hotw-logo.png"
+import React, { useEffect  } from 'react';
+import officialNameIcon from '../../assets/countries_icons/countries_official_name.png';
+import populationIcon from '../../assets/countries_icons/countries_population.png';
+import capitalIcon from '../../assets/countries_icons/countries_capital.png';
+import langIcon from '../../assets/countries_icons/countries_language.png';
+import currencyIcon from '../../assets/countries_icons/countries_currency.png';
 import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import Card from 'react-bootstrap/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFavorite, deleteFromFavorite, favoriteCountriesSelector } from '../../features/countries/countriesSlice';
 
-//TODO: Million-Thouthans conversor.
-//ex data in: [10.5, 0.5, 0.0035, 0.00010]
-//ex data out: [10.5M, 500k, 3.5k, 100]
-
-const openWeather = "https://api.openweathermap.org/data/2.5/weather";
-const secretKey = "80e877059407012cbef59f8ac82bcf1c";
-const getWeather = (city) => axios.get(`${openWeather}?q=${city}&appid=${secretKey}&units=metric`);
+import { populationReader } from '../../functions/populationReader';
 
 function BSCard({
     commonName,
@@ -29,25 +22,33 @@ function BSCard({
     languages,
     url,
     data
-}) 
+}) {
+  const favoriteList = useSelector(favoriteCountriesSelector);
+  const dispatch = useDispatch();
+  const cityImage = 'https://source.unsplash.com/500x400/?'  +  commonName; 
 
-{
-  const capitalStart = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-  const cityImage = 'https://source.unsplash.com/500x400/?'  +  commonName; //+ capital;
-
-  useEffect(() => {
-    setLoading(true);
-      Promise.all([getcountries()]).then(function (results) {
-      const countriesData = results[0]; 
-      setCountries(countriesData.data);
-      countries.map(country => {
-        console.log(country.capital)
-      })
+  useEffect(()=>{
+    localStorage.setItem('favoriteCountries', favoriteList);
+  }, [favoriteList])
     
-      setLoading(false);
-    });
-  }, []);
+  const favoriteHandler = (e) => {
+    if(e.target.checked){
+      dispatch(addToFavorite(data?.name.common));
+    } 
+    else {
+      dispatch(deleteFromFavorite(data.name.common));
+    }  
+  }
 
+   const checkIsFavorite = (commonName) => {
+    //conditional render checkbox
+    for(let item of favoriteList){
+      if( item === commonName){
+        return true;
+      }
+    }
+    return false
+  };
 
   return (
     <div style={{
@@ -63,11 +64,16 @@ function BSCard({
               justifyContent:"space-between"
             }}>
               {commonName} 
+            
               <img src={flag} alt="flag" className="flag"/>
-            </Card.Title>
-  
-            <div >
 
+              <div>
+                <label htmlFor="isFavorite">Favorite</label>
+                <input type="checkbox" name="isFavorite" onClick={favoriteHandler} defaultChecked={checkIsFavorite(commonName) ? true : false} value={checkIsFavorite()}/>
+              </div>
+
+            </Card.Title>  
+            <div >
               <div className='smallData'>
                 <p><img src={officialNameIcon} alt="officialName" className="tinyIcon" /></p>
                 <p>{officialName}</p>
@@ -75,9 +81,8 @@ function BSCard({
           
               <div className='smallData'>
                 <p><img src={populationIcon} alt="officialName" className="tinyIcon" /></p>
-                <p>{(population/1000000).toPrecision(2)}M</p>
-              </div>
-          
+                <p>{populationReader(population)}</p>
+              </div>          
               <div className='smallData'>
                 <p><img src={capitalIcon} alt="officialName" className="tinyIcon" /></p>
                 <p>{capital}</p>
@@ -87,35 +92,29 @@ function BSCard({
                 <p><img src={langIcon} alt="officialName" className="tinyIcon" /></p>
                 <div className="repeatedSmallData">
                   {
-                    Object.values(languages || {}).map((value, i)=>(
-                      
+                    Object.values(languages || {}).map((value, i)=>(      
                         <p key={i}> {(i ? '' : '') + value} </p>
-                      
                     ))
                   }
                 </div>
               </div>
-
               <div className='smallData'>
                 <p><img src={currencyIcon} alt="officialName" className="tinyIcon" /></p>
                 <div className="repeatedSmallData">
                   {
-                    Object.values(currencies || {}).map((value, i)=>(
-                      
-                        <p key={i}> {(i ? '' : '') + value.name} </p>
-                      
+                    Object.values(currencies || {}).map((value, i)=>(                     
+                        <p key={i}> {(i ? '' : '') + value.name} </p>                      
                     ))
                   }
                 </div>
             </div>
           </div>
-
             <LinkContainer 
               to={url} state={{data:data}}>
               <Button 
                 variant="primary" 
                 >
-                  More Info TEST
+                  More Info
                   
                 </Button>
             </LinkContainer>
