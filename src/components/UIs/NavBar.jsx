@@ -31,7 +31,7 @@ const NavBar = () => {
             </LinkContainer>
 
             <LinkContainer to="/favorites">
-              <Nav.Link>Favorite</Nav.Link>
+              <Nav.Link>Favorites</Nav.Link>
             </LinkContainer>
 
             {/* <LinkContainer to="/about">
