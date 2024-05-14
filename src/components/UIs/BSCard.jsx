@@ -1,4 +1,6 @@
-import React, { useEffect  } from 'react';
+import React,{ useEffect  } from 'react';
+// 
+ 
 import officialNameIcon from '../../assets/countries_icons/countries_official_name.png';
 import populationIcon from '../../assets/countries_icons/countries_population.png';
 import capitalIcon from '../../assets/countries_icons/countries_capital.png';
@@ -11,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToFavorite, deleteFromFavorite, favoriteCountriesSelector } from '../../features/countries/countriesSlice';
 
 import { populationReader } from '../../functions/populationReader';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 function BSCard({
     commonName,
@@ -27,6 +30,13 @@ function BSCard({
   const dispatch = useDispatch();
   const cityImage = 'https://source.unsplash.com/500x400/?'  +  commonName; 
 
+  const [
+    favorites, 
+    addToFav, 
+    removeFromFav, 
+    // clearFav
+  ] = useLocalStorage('favoriteCountries', []);
+
   useEffect(()=>{
     localStorage.setItem('favoriteCountries', favoriteList);
   }, [favoriteList])
@@ -34,9 +44,11 @@ function BSCard({
   const favoriteHandler = (e) => {
     if(e.target.checked){
       dispatch(addToFavorite(data?.name.common));
+      addToFav(data?.name.common);
     } 
     else {
-      dispatch(deleteFromFavorite(data.name.common));
+      dispatch(deleteFromFavorite(data?.name.common));
+      removeFromFav(data?.name.common);
     }  
   }
 
@@ -47,7 +59,7 @@ function BSCard({
         return true;
       }
     }
-    return false
+    return false;
   };
 
   return (

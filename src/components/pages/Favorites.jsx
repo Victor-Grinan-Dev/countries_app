@@ -8,15 +8,11 @@ import { useSelector } from "react-redux";
 import World from "../UIs/World";
 
 function Favorites() {
-  // const countries = useSelector((state) => state.countries.countries);
+
   const favCountries = useSelector(
     (state) => state.countries.favoriteCountries
   );
-  const isLoading = useSelector((state) => state.countries.isLoading);
 
-  // if (isLoading) {
-  //   return <h1>Loading...</h1>;
-  // }
   return (
     <div
       className="page"
