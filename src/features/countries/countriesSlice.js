@@ -13,7 +13,7 @@ export const countriesSlice = createSlice({
     filterDataCountries: [],
     isLoading: true,
     search: "",
-    favoriteCountries: [],
+    favoriteCountries: ['cuba'],
     favCountriesObjects: [],
   },
 

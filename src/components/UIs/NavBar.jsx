@@ -3,7 +3,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+// import NavDropdown from "react-bootstrap/NavDropdown";
 
 const NavBar = () => {
   return (
@@ -30,11 +30,15 @@ const NavBar = () => {
               <Nav.Link>Browse</Nav.Link>
             </LinkContainer>
 
-            <LinkContainer to="/about">
-              <Nav.Link>About</Nav.Link>
+            <LinkContainer to="/favorites">
+              <Nav.Link>Favorite</Nav.Link>
             </LinkContainer>
 
-            <NavDropdown title="Menu" id="basic-nav-dropdown">
+            {/* <LinkContainer to="/about">
+              <Nav.Link>About</Nav.Link>
+            </LinkContainer> */}
+
+            {/* <NavDropdown title="Menu" id="basic-nav-dropdown">
               <LinkContainer to="/favorites">
                 <NavDropdown.Item>Favorites</NavDropdown.Item>
               </LinkContainer>
@@ -42,7 +46,7 @@ const NavBar = () => {
               <LinkContainer to="/analizer">
                 <NavDropdown.Item>Data Analizer</NavDropdown.Item>
               </LinkContainer>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

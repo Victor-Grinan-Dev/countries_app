@@ -16,6 +16,7 @@ import "./styles/browse.css"
 import "./styles/Card.css"
 import "./styles/home.css"
 import "./styles/singleItem.css"
+import "./styles/world.css"
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
