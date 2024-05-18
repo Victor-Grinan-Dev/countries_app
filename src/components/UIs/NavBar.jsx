@@ -1,5 +1,4 @@
 import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,37 +14,25 @@ const NavBar = () => {
       }}
     >
       <Container>
-        <LinkContainer to="/">
-          <Navbar.Brand>Countries App </Navbar.Brand>
-        </LinkContainer>
-
+      <Navbar.Brand href="/">Countries App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <LinkContainer to="/">
-              <Nav.Link to="home">Home</Nav.Link>
-            </LinkContainer>
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/browse">Browse</Nav.Link>
+            <Nav.Link href="/favorites">Favorites</Nav.Link>
+            {/* <Nav.Link href="#link">Link</Nav.Link> */}
 
-            <LinkContainer to="/browse">
-              <Nav.Link>Browse</Nav.Link>
-            </LinkContainer>
-
-            <LinkContainer to="/favorites">
-              <Nav.Link>Favorites</Nav.Link>
-            </LinkContainer>
-
-            {/* <LinkContainer to="/about">
-              <Nav.Link>About</Nav.Link>
-            </LinkContainer> */}
-
-            {/* <NavDropdown title="Menu" id="basic-nav-dropdown">
-              <LinkContainer to="/favorites">
-                <NavDropdown.Item>Favorites</NavDropdown.Item>
-              </LinkContainer>
+            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
-              <LinkContainer to="/analizer">
-                <NavDropdown.Item>Data Analizer</NavDropdown.Item>
-              </LinkContainer>
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
             </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>

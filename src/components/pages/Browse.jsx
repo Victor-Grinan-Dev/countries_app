@@ -2,7 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import BSCard from '../UIs/BSCard';
+// import BSCard from '../UIs/BSCard';
+import Card from '../UIs/Card';
 
 const countriesApi = "https://restcountries.com/v3.1/all";
 
@@ -60,7 +61,7 @@ function Browse() {
 
           {countriesFilter.map((country, index) => (
                 //  console.log(country)
-              <BSCard 
+              <Card 
               key={index}
               //key={country.ccn3}
               commonName={country.name.common} 
