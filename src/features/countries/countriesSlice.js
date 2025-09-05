@@ -1,9 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import countryService from "../../services/countries";
-import {
-  httpGetALLCountries,
-  httpGetALLFavCountries,
-} from "../../services/requests";
 
 export const countriesSlice = createSlice({
   name: "countries",
@@ -67,17 +63,7 @@ export const countriesSlice = createSlice({
 
 export const initializeCountries = () => {
   return async (dispatch) => {
-    dispatch(isLoading(true));
     const countries = await countryService.getAll();
-    const favCountries = await httpGetALLFavCountries((data) =>
-      console.log(data)
-    );
-    const dataCountries = await httpGetALLCountries((data) =>
-      console.log(data.data)
-    );
-
-    dispatch(setFavorites(favCountries));
-    dispatch(setDataCountries(dataCountries));
     dispatch(getCountries(countries));
     dispatch(isLoading(false));
   };

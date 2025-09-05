@@ -1,22 +1,17 @@
 // import React, { Children } from "react";
 // import { useState } from "react";
-import { useSelector } from "react-redux";
-
-// import DraggingBoard from '../UIs/DraggingBoard';
-// import FavCard from "../UIs/FavCard";
-
-import World from "../UIs/World";
+// import { useSelector } from "react-redux";
 
 function Favorites() {
 
-  const favCountries = useSelector(
-    (state) => state.countries.favoriteCountries
-  );
+  // const favCountries = useSelector(
+  //   (state) => state.countries.favoriteCountries
+  // );
 
   return (
     <div
       className="page"
-      style={{ display: "flex", alignItems: "center", flexDirection: "column", backgroundColor:'#030303dc', height:'100%' }}
+      style={{ display: "flex", alignItems: "center", flexDirection: "column", backgroundColor:'#030303dc', minHeight: '100vh', maxHeight: '250%' }}
     >
       <h2 style={{ color: "white" }}>Favorites</h2>
       <div>

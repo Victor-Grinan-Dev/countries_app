@@ -1,32 +1,53 @@
-import React from 'react';
-import {useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { getUnsplashPhoto } from "../../services/unsplash";
+import { useEffect, useState } from "react";
+
+const key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 
 function SingleItem() {
+  const [countryImage, setCountryImage] = useState(null);
+  const [error, setError] = useState(null);
 
   const location = useLocation();
-  const data = location.state.data;
-  const name = data.name.common;
+  const part = location.pathname.split("/").filter(Boolean);
+  const name = part[1]; // country name from URL
 
-  const countryImage = 'https://source.unsplash.com/500x400/?' + name;
+  useEffect(() => {
+    async function fetchImage() {
+      try {
+        const data = await getUnsplashPhoto(name);
 
-  console.log(location.state.data)
+        if (data && data.urls) {
+          setCountryImage(data.urls.small);
+        } else {
+          setError("No image found");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch from Unsplash");
+      }
+    }
+
+    if (name) {
+      fetchImage();
+    }
+  }, [name]);
+
+  if (error) {
+    return <div style={{ color: "red" }}>{error}</div>;
+  }
 
   return (
-    <div 
-    style={{
-      color:"white"
-    }}
-    >
-
-         <h2 >Name: {data.name.common} <img src={data.flags.png} alt={data.name.common} style={{ width:"30px" }} /></h2>
-        <hr />
-        <p>Official name: {data.name.official}</p>
-        <p>Population: {data.population}</p>
-        <p>Capital: {data.capital}</p> 
-
-        <img src={countryImage} alt="country" />
+    <div style={{ color: "white" }}>
+      {countryImage ? (
+        <img src={countryImage} alt={name} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
-  )
+  );
 }
 
-export default SingleItem
+export default SingleItem;
+
+
