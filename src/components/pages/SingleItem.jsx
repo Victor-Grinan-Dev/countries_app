@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { getUnsplashPhoto } from "../../services/unsplash";
 import { useEffect, useState } from "react";
 
-const key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
+// const key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 
 function SingleItem() {
   const [countryImage, setCountryImage] = useState(null);
