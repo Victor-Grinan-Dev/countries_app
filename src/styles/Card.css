@@ -44,6 +44,14 @@
     width: 200px;
 }
 
+.icon-container{
+    background-color: white;
+}
+
+.smallData p{
+    text-align: end;
+}
+
 .smallData .div {
     margin: 10pxs;
 

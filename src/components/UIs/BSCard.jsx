@@ -12,6 +12,7 @@ import { populationReader } from '../../functions/populationReader';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Link } from 'react-router-dom';
 import FavoriteHeart from './FavoriteHeart';
+import Tooltip from './Tooltip';
 
 function BSCard({
   commonName,
@@ -64,22 +65,41 @@ function BSCard({
 
           <div>
             <div className='smallData'>
-              <p><img src={officialNameIcon} alt="officialName" className="tinyIcon" /></p>
+            
+              <Tooltip text='Official Name'>
+                <div className='icon-container'>
+                  <img src={officialNameIcon} alt="officialName" className="tinyIcon" />
+                </div>
+              </Tooltip>
+
               <p>{officialName}</p>
             </div>
         
             <div className='smallData'>
-              <p><img src={populationIcon} alt="population" className="tinyIcon" /></p>
+              <Tooltip text='Population'>
+                <div className='icon-container'>
+                  <img src={populationIcon} alt="population" className="tinyIcon" />
+                </div>
+              </Tooltip>
               <p>{populationReader(population)}</p>
             </div>          
 
             <div className='smallData'>
-              <p><img src={capitalIcon} alt="capital" className="tinyIcon" /></p>
+               <Tooltip text='Capital'>
+                <div className='Capital'>
+                  <img src={capitalIcon} alt="capital" className="tinyIcon" />
+                </div>
+               </Tooltip>
               <p>{capital}</p>
             </div>
 
             <div className='smallData'>
-              <p><img src={langIcon} alt="languages" className="tinyIcon" /></p>
+               <Tooltip text='Languages'>
+                <div className='icon-container'>
+                  <img src={langIcon} alt="languages" className="tinyIcon" />
+                </div>
+               </Tooltip>
+
               <div className="repeatedSmallData">
                 {Object.values(languages || {}).map((value, i) => (      
                   <p key={i}>{value}</p>
@@ -88,7 +108,11 @@ function BSCard({
             </div>
 
             <div className='smallData'>
-              <p><img src={currencyIcon} alt="currencies" className="tinyIcon" /></p>
+              <Tooltip text='Currencies'>
+                <div className='icon-container'>
+                  <img src={currencyIcon} alt="currencies" className="tinyIcon" />
+                </div>
+              </Tooltip>
               <div className="repeatedSmallData">
                 {Object.values(currencies || {}).map((value, i) => (                     
                   <p key={i}>{value.name}</p>                      

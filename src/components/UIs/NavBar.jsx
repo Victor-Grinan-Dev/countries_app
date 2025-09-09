@@ -1,9 +1,7 @@
-import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
 
 const NavBar = () => {
   return (
@@ -15,38 +13,24 @@ const NavBar = () => {
       }}
     >
       <Container>
-        <LinkContainer to="/">
-          <Navbar.Brand>Countries App </Navbar.Brand>
-        </LinkContainer>
+        <Navbar.Brand as={Link} to="/">
+          Countries App
+        </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <LinkContainer to="/">
-              <Nav.Link to="home">Home</Nav.Link>
-            </LinkContainer>
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
 
-            <LinkContainer to="/browse">
-              <Nav.Link>Browse</Nav.Link>
-            </LinkContainer>
+            <Nav.Link as={Link} to="/browse">
+              Browse
+            </Nav.Link>
 
-            <LinkContainer to="/favorites">
-              <Nav.Link>Favorites</Nav.Link>
-            </LinkContainer>
-
-            {/* <LinkContainer to="/about">
-              <Nav.Link>About</Nav.Link>
-            </LinkContainer> */}
-
-            {/* <NavDropdown title="Menu" id="basic-nav-dropdown">
-              <LinkContainer to="/favorites">
-                <NavDropdown.Item>Favorites</NavDropdown.Item>
-              </LinkContainer>
-              <NavDropdown.Divider />
-              <LinkContainer to="/analizer">
-                <NavDropdown.Item>Data Analizer</NavDropdown.Item>
-              </LinkContainer>
-            </NavDropdown> */}
+            <Nav.Link as={Link} to="/favorites">
+              Favorites
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -55,3 +39,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
