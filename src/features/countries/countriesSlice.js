@@ -1,14 +1,29 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import countryService from "../../services/countries";
+// import { loadFavorites } from "../../hooks/useLocalStorage";
+
+
+export const loadFavorites = () => {
+  try {
+    const item = window.localStorage.getItem("favoriteCountries");
+    return item ? JSON.parse(item) : [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+const initialState = {
+  favoriteCountries: loadFavorites(),
+};
 
 export const countriesSlice = createSlice({
   name: "countries",
-  initialState: {
+  initialState: {...initialState,
     countries: [],
     filteredCountries: [],
     isLoading: true,
     search: "",
-    favoriteCountries: [],
   },
 
   reducers: {
@@ -30,31 +45,34 @@ export const countriesSlice = createSlice({
       state.search = action.payload;
     },
 
-    setFavorites(state, action) {
-      state.favoriteCountries = action.payload;
-    },
-
     addToFavorite(state, action) {
-      state.favoriteCountries.push(action.payload);
-      // state.favoriteCountries = current(state).favoriteCountries.filter(
-      //   (element, index) => {
-      //     return current(state).favoriteCountries.indexOf(element) === index;
-      //   }
-      // );
+      if (
+        action.payload &&                           // ✅ ignore null/undefined
+        !state.favoriteCountries.includes(action.payload)
+      ) {
+        state.favoriteCountries.push(action.payload);
+        window.localStorage.setItem(
+          "favoriteCountries",
+          JSON.stringify(state.favoriteCountries)
+        );
+      }
     },
 
     deleteFromFavorite(state, action) {
-      const newArray = state.favoriteCountries.filter((item) => {
-        return item !== action.payload;
-      });
+      const newArray = state.favoriteCountries.filter(item => item !== action.payload);
       state.favoriteCountries = newArray;
+      window.localStorage.setItem(
+        "favoriteCountries",
+        JSON.stringify(state.favoriteCountries)
+      );
     },
 
-    setFavoriteCountriesObjects(state, action) {
-      state.favCountriesObjects = action.payload;
-    },
-    addFavCountriesObjects(state, action) {
-      state.favCountriesObjects.push(action.payload);
+    setFavorites(state, action) {
+      state.favoriteCountries = action.payload;
+      window.localStorage.setItem(
+        "favoriteCountries",
+        JSON.stringify(state.favoriteCountries)
+      );
     },
   },
 });
@@ -67,6 +85,7 @@ export const initializeCountries = () => {
   };
 };
 
+
 export const {
   getCountries,
   isLoading,
@@ -76,7 +95,6 @@ export const {
   setFavorites,
   setDataCountries,
   setFilterDataCountries,
-  addFavCountriesObjects,
 } = countriesSlice.actions;
 
 export const favoriteCountriesSelector = (state) =>

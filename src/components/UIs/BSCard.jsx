@@ -29,7 +29,7 @@ function BSCard({
   const dispatch = useDispatch();
 
   const [
-    // favorites, 
+    //favorites,
     addToFav, 
     removeFromFav
   ] = useLocalStorage('favoriteCountries', []);

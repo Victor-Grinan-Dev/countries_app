@@ -5,7 +5,7 @@ function useLocalStorage(key, initialValue) {
     try {
       const item = window.localStorage.getItem(key);
       const parsed = item ? JSON.parse(item) : initialValue;
-      return Array.isArray(parsed) ? parsed : [];
+      return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
     } catch (error) {
       console.log(error);
       return [];
@@ -13,21 +13,23 @@ function useLocalStorage(key, initialValue) {
   });
 
   useEffect(() => {
-    try {
-      window.localStorage.setItem(key, JSON.stringify(storedValue));
-    } catch (error) {
-      console.log(error);
+    if (storedValue !== null) {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(storedValue));
+      } catch (error) {
+        console.log(error);
+      }
     }
   }, [key, storedValue]);
-
-  const addItem = (item) => {
-    console.log('add item')
-    setStoredValue((prev) => {
-      if (Array.isArray(prev) && !prev.includes(item)) {
-        return [...prev, item];
-      }
-      return prev;
-    });
+    
+    const addItem = (item) => {
+      console.log('add item')
+      setStoredValue((prev) => {
+        if (Array.isArray(prev) && !prev.includes(item)) {
+          return [...prev, item];
+        }
+        return prev;
+      });
   };
 
   const removeItem = (item) => {
@@ -43,3 +45,13 @@ function useLocalStorage(key, initialValue) {
 }
 
 export default useLocalStorage;
+
+export const loadFavorites = () => {
+  try {
+    const item = window.localStorage.getItem("favoriteCountries");
+    return item ? JSON.parse(item) : [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
