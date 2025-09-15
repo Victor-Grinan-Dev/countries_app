@@ -8,7 +8,7 @@ export const countriesSlice = createSlice({
     filteredCountries: [],
     isLoading: true,
     search: "",
-    favoriteCountries: ['CU'],
+    favoriteCountries: [],
   },
 
   reducers: {
