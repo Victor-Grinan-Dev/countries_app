@@ -5,12 +5,10 @@ export const countriesSlice = createSlice({
   name: "countries",
   initialState: {
     countries: [],
-    dataCountries: [],
-    filterDataCountries: [],
+    filteredCountries: [],
     isLoading: true,
     search: "",
-    favoriteCountries: ['cuba'],
-    favCountriesObjects: [],
+    favoriteCountries: ['CU'],
   },
 
   reducers: {
@@ -38,11 +36,11 @@ export const countriesSlice = createSlice({
 
     addToFavorite(state, action) {
       state.favoriteCountries.push(action.payload);
-      state.favoriteCountries = current(state).favoriteCountries.filter(
-        (element, index) => {
-          return current(state).favoriteCountries.indexOf(element) === index;
-        }
-      );
+      // state.favoriteCountries = current(state).favoriteCountries.filter(
+      //   (element, index) => {
+      //     return current(state).favoriteCountries.indexOf(element) === index;
+      //   }
+      // );
     },
 
     deleteFromFavorite(state, action) {

@@ -28,6 +28,7 @@ function Browse() {
           currencies={country.currencies} 
           languages={country.languages}
           url={country.name.common}
+          cc2={country.cca2}
           />
       ))}
     </div>

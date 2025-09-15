@@ -22,8 +22,8 @@ function BSCard({
   capital,
   currencies,
   languages,
-  url,
-  data
+  url,      
+  cc2
 }) {
   const favoriteList = useSelector(favoriteCountriesSelector);
   const dispatch = useDispatch();
@@ -36,15 +36,15 @@ function BSCard({
 
   const favoriteHandler = (e) => {
     if (e.target.checked) {
-      dispatch(addToFavorite(data?.name.common));
-      addToFav(data?.name.common);
+      dispatch(addToFavorite(cc2));
+      addToFav(cc2);
     } else {
-      dispatch(deleteFromFavorite(data?.name.common));
-      removeFromFav(data?.name.common);
+      dispatch(deleteFromFavorite(cc2));
+      removeFromFav(cc2);
     }  
   };
 
-  const checkIsFavorite = (commonName) => favoriteList.includes(commonName);
+  const checkIsFavorite = (cc2) => favoriteList.includes(cc2);
 
   return (
     <div style={{ margin: "20px 0" }}>
@@ -60,6 +60,7 @@ function BSCard({
             <FavoriteHeart
               defaultChecked={checkIsFavorite(commonName)}
               onToggle={favoriteHandler}
+              countryCode={cc2}
             />
           </Card.Title> 
 
@@ -129,7 +130,7 @@ function BSCard({
               capital,
               currencies,
               languages,
-              data
+              cc2
             }} 
           style={{ textDecoration: 'none' }}>
             <Button variant="primary">More Info</Button>

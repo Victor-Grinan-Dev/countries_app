@@ -1,13 +1,22 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { addToFavorite, deleteFromFavorite } from "../../features/countries/countriesSlice";  
+import { useDispatch } from "react-redux";
 
-function FavoriteHeart({ defaultChecked, onToggle }) {
-  const [liked, setLiked] = useState(defaultChecked);
+function FavoriteHeart({ countryCode }) {
+  const dispatch = useDispatch();
+  const [favorites, addFavorite, removeFavorite] = useLocalStorage("favoriteCountries", []);
+  const liked = !!favorites.includes(countryCode);
 
   const handleClick = () => {
-    setLiked(!liked);
-    onToggle?.(!liked);
+    if (liked) {
+      removeFavorite(countryCode);
+      dispatch(deleteFromFavorite(countryCode));
+    } else {
+      addFavorite(countryCode);
+      dispatch(addToFavorite(countryCode));
+    }
   };
 
   return (
@@ -26,4 +35,5 @@ function FavoriteHeart({ defaultChecked, onToggle }) {
     </motion.button>
   );
 }
+
 export default FavoriteHeart;
