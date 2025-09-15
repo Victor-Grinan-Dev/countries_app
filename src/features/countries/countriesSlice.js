@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import countryService from "../../services/countries";
-// import { loadFavorites } from "../../hooks/useLocalStorage";
-
 
 export const loadFavorites = () => {
   try {
@@ -47,7 +45,7 @@ export const countriesSlice = createSlice({
 
     addToFavorite(state, action) {
       if (
-        action.payload &&                           // ✅ ignore null/undefined
+        action.payload && 
         !state.favoriteCountries.includes(action.payload)
       ) {
         state.favoriteCountries.push(action.payload);

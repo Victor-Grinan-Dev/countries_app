@@ -1,5 +1,3 @@
-
-
 export const  populationReader = (number) => {
 
     if(number > 1000000){

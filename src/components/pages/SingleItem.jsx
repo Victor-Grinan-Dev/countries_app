@@ -2,15 +2,13 @@ import { useLocation } from "react-router-dom";
 import { getUnsplashPhoto } from "../../services/unsplash";
 import { useEffect, useState } from "react";
 
-// const key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
-
 function SingleItem() {
   const [countryImage, setCountryImage] = useState(null);
   const [error, setError] = useState(null);
 
   const location = useLocation();
   const part = location.pathname.split("/").filter(Boolean);
-  const name = part[1]; // country name from URL
+  const name = part[1];
 
   useEffect(() => {
     async function fetchImage() {

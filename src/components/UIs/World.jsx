@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-// import { useSelector } from "react-redux";
 
 const World = (props) => {
   const { favListCodes } = props;
-  // const countries = useSelector((state) => state.countries.countries);
   const color = "orange";
-
 
   useEffect(() => {
     favListCodes?.forEach((checkedCode) => {
@@ -23,7 +20,6 @@ const World = (props) => {
         <svg
           className="ag-canvas_svg"
           xmlns="http://www.w3.org/2000/svg"
-          // xmlns:xlink="http://www.w3.org/1999/xlink"
           version="1.1"
           viewBox="0 0 1008 651"
         >

@@ -3,17 +3,8 @@ import { useSelector } from 'react-redux';
 
 function Browse() {
   const countries = useSelector(state => {
-    // console.log(state.countries.countries);
     return state.countries.countries;
   });
-  // const [countriesWeather, setCountriesWeather] = useState({});
-
-  // const [search, setSearch] = useState('');
-  // const [loading, setLoading] = useState(false);
-
-  // const searchHandler = (e) => {
-  //   setSearch(e.target.value); 
-  //   };
 
   return (
     <div className="browse" style={{ display: "flex", alignItems:'flex-start', gap:'10px', flexDirection: "row", backgroundColor:'#030303dc', minHeight: '100vh', maxHeight: '250%' }}>
