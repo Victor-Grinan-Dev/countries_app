@@ -1,18 +1,18 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const World = (props) => {
   const { favListCodes } = props;
-  const countries = useSelector((state) => state.countries.countries);
+  // const countries = useSelector((state) => state.countries.countries);
   const color = "orange";
 
+
   useEffect(() => {
-    favListCodes?.forEach((favCountry) => {
-      countries?.forEach((country) => {
-        if (country.name.common === favCountry) {
-          document.getElementById(`${country.cca2}`).style.fill = color;
-        }
-      });
+    favListCodes?.forEach((checkedCode) => {
+      const el = document.getElementById(`${checkedCode}`);
+      if (el && el.style) {
+        el.style.fill = color;
+      }
     });
     // eslint-disable-next-line
   }, [favListCodes]);
