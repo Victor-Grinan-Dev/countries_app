@@ -9,7 +9,7 @@ export const loadFavorites = () => {
     console.log(error);
     return [];
   }
-}
+};
 
 const initialState = {
   favoriteCountries: loadFavorites(),
@@ -17,22 +17,27 @@ const initialState = {
 
 export const countriesSlice = createSlice({
   name: "countries",
-  initialState: {...initialState,
+  initialState: {
+    ...initialState,
     countries: [],
     filteredCountries: [],
     isLoading: true,
     search: "",
+    sortBy: "", // new field for sorting
   },
 
   reducers: {
     getCountries(state, action) {
       state.countries = action.payload;
+      state.filteredCountries = action.payload;
     },
+
     setDataCountries(state, action) {
       state.dataCountries = action.payload;
     },
+
     setFilterDataCountries(state, action) {
-      state.countries = action.payload;
+      state.filteredCountries = action.payload;
     },
 
     isLoading(state, action) {
@@ -41,11 +46,37 @@ export const countriesSlice = createSlice({
 
     search(state, action) {
       state.search = action.payload;
+      state.filteredCountries = state.countries.filter((country) =>
+        country.name.common.toLowerCase().includes(action.payload.toLowerCase())
+      );
+    },
+
+    sortCountries(state, action) {
+      state.sortBy = action.payload;
+      let sorted = [...state.filteredCountries];
+
+      switch (action.payload) {
+        case "name":
+          sorted.sort((a, b) => a.name.common.localeCompare(b.name.common));
+          break;
+        case "population":
+          sorted.sort((a, b) => a.population - b.population);
+          break;
+        case "capital":
+          sorted.sort((a, b) =>
+            (a.capital[0] || "").localeCompare(b.capital[0] || "")
+          );
+          break;
+        default:
+          break;
+      }
+
+      state.filteredCountries = sorted;
     },
 
     addToFavorite(state, action) {
       if (
-        action.payload && 
+        action.payload &&
         !state.favoriteCountries.includes(action.payload)
       ) {
         state.favoriteCountries.push(action.payload);
@@ -57,7 +88,9 @@ export const countriesSlice = createSlice({
     },
 
     deleteFromFavorite(state, action) {
-      const newArray = state.favoriteCountries.filter(item => item !== action.payload);
+      const newArray = state.favoriteCountries.filter(
+        (item) => item !== action.payload
+      );
       state.favoriteCountries = newArray;
       window.localStorage.setItem(
         "favoriteCountries",
@@ -79,15 +112,16 @@ export const initializeCountries = () => {
   return async (dispatch) => {
     const countries = await countryService.getAll();
     dispatch(getCountries(countries));
+    dispatch(sortCountries("name")); // ✅ initialize sorted by name
     dispatch(isLoading(false));
   };
 };
-
 
 export const {
   getCountries,
   isLoading,
   search,
+  sortCountries,
   addToFavorite,
   deleteFromFavorite,
   setFavorites,

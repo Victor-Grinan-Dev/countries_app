@@ -3,22 +3,23 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
-import { useSelector, 
-  // useDispatch 
-} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
-// import { setSort } from "../features/countries/countriesSlice";
+import { sortCountries, search } from "../../features/countries/countriesSlice";
 
 const NavBar = () => {
   const favoriteCount = useSelector(
     (state) => state.countries.favoriteCountries.length
   );
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const location = useLocation();
 
   const handleSort = (e) => {
-    console.log('sorting by', e.target.value);
-    // dispatch(setSort(e.target.value));
+    dispatch(sortCountries(e.target.value));
+  };
+
+  const handleSearch = (e) => {
+    dispatch(search(e.target.value));
   };
 
   const showFilters = location.pathname.endsWith("/browse");
@@ -72,7 +73,7 @@ const NavBar = () => {
               >
                 <option value="name">Sort by Name</option>
                 <option value="population">Sort by Population</option>
-                <option value="currency">Sort by Currency</option>
+                <option value="capital">Sort by Capital</option>
               </Form.Select>
               <Form className="d-flex me-3">
                 <Form.Control
@@ -80,6 +81,7 @@ const NavBar = () => {
                   placeholder="Search countries"
                   className="me-2"
                   aria-label="Search"
+                  onChange={handleSearch}
                 />
                 <Button variant="outline-success">Search</Button>
               </Form>

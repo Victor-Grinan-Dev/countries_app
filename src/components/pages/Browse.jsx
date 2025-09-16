@@ -2,13 +2,13 @@ import BSCard from '../UIs/BSCard';
 import { useSelector } from 'react-redux';
 
 function Browse() {
-  const countries = useSelector(state => {
-    return state.countries.countries;
+  const filteredCountries = useSelector(state => {
+    return state.countries.filteredCountries;
   });
 
   return (
     <div className="browse" style={{ display: "flex", alignItems:'flex-start', gap:'10px', flexDirection: "row", backgroundColor:'#030303dc', minHeight: '100vh', maxHeight: '250%' }}>
-      {countries && countries.map((country, index) => (
+      {filteredCountries && filteredCountries.map((country, index) => (
         <BSCard 
           key={index }
           commonName={country.name.common}
