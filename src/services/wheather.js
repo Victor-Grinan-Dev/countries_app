@@ -1,5 +1,5 @@
 export async function getOpenWeather(city, isCelsius=true) {
-const apiKey = ACCESS_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY
+const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY
 const url = `api.openweathermap.org/data/2.5/forecast?q=${city}${isCelsius && "&units=metric"}&appid=${apiKey}`
 
   try {
