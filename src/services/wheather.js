@@ -14,3 +14,12 @@ const url = `api.openweathermap.org/data/2.5/forecast?q=${city}${isCelsius && "&
     return null;
   }
 }
+
+//list[0].main.temp
+//list[0].dt
+//list[0].dt_txt
+
+/* ICON */
+//list[0].weather[0].icon
+//list[0].weather[0].description
+//<img src="http://openweathermap.org/img/wn/03d@2x.png" alt="Weather icon">
